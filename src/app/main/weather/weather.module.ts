@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { WeatherComponent } from './weather.component';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { CommonModule } from '@angular/common';
 
 const routes: Routes = [
     {
@@ -9,7 +11,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes)],
+    imports: [RouterModule.forChild(routes), SharedModule.forRoot(), CommonModule],
     declarations: [WeatherComponent],
     exports: [RouterModule]
 })

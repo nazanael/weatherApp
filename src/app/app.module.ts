@@ -1,24 +1,35 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import {StoreModule} from '@ngrx/store';
-import {weather} from './shared/stores/weather-store';
+import { weather, currentWeather } from './shared/stores/weather-store';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LayoutModule } from './layout/layout.module';
 import { WeatherService } from './shared/services/weather-service';
+import { CoreModule } from './core/core.module';
+import { ConfigService } from './core/services/config.service';
+
+export function initializeConfiguration(configService: ConfigService) {
+  return () => configService.getConfiguration();
+}
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
+    CoreModule.forRoot(),
     BrowserModule,
     AppRoutingModule,
     LayoutModule,
-    StoreModule.forRoot({weather})
+    StoreModule.forRoot({weather, currentWeather})
   ],
-  providers: [WeatherService],
+  providers: [
+    { provide: APP_INITIALIZER,
+      useFactory: initializeConfiguration,
+      deps: [ConfigService], multi: true },
+      WeatherService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,4 +1,59 @@
+<!--<div class="container">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-header">Panel Heading</div>
+                <div class="card-block">Panel Content</div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-header">Panel Heading</div>
+                <div class="card-block">Panel Content</div>
+            </div>
+        </div>
+    </div>
+</div> -->
+<!--<div class="page-wrapper">
+    <ng-template ngFor let-weather [ngForOf]="currentWeather | async" let-odd="odd" let-even="even">    
+    <div class="page-row">
+        <div class="page-column">
+            <div class="column-content">
+                    AAAA
+            </div>
+            <div class="column-content">
+                    AAAA
+            </div>
+            <div class="column-content">
+                    AAAA
+            </div>
+            <div class="column-content">
+                    AAAA
+            </div>
+        </div>
+        <div class="page-column">
+                <div class="column-content">
+                        AAAA
+                </div>
+                <div class="column-content">
+                        AAAA
+                </div>
+            </div>
+    </div>
+    </ng-template>
+</div> -->
+
 weather component
-<ul>
-    <!--<li *ngFor="let weather of weatherList">{{weather}}</li> -->
-</ul>
+{{currentWeathers}}
+<div class="container">
+    <div class="row">
+        <div *ngFor="let weather of currentWeather | async" class="col-xs-12 col-sm-6">
+            <img [src]="getIconUrl(weather)">
+            {{weather.id}}
+            {{weather.name}}
+            {{weather.main.temp}}
+            {{weather.weather[0].icon}}
+        </div>
+    </div>
+</div>
+<button (click)="addWeather()">ADD</button>
