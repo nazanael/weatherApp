@@ -3,6 +3,7 @@ import { WeatherService } from 'src/app/shared/services/weather-service';
 import { CityWeather } from 'src/app/core/models/city-weather';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { ConfigService } from 'src/app/core/services/config.service';
 @Component({
     selector: 'app-weather',
     templateUrl: './weather.component.html',
@@ -26,7 +27,11 @@ export class WeatherComponent implements OnInit {
     //TODO: get in service, picture component?
     getIconUrl(cityWeather: CityWeather) {
         if (cityWeather && cityWeather.weather) {
-            return 'http://openweathermap.org/img/w/' + cityWeather.weather[0].icon + '.png';
+            return ConfigService.Configuration.weatherIconUrl + cityWeather.weather[0].icon + '.png';
         }
+    }
+
+    getRoundNumber(numberToRound: number): number {
+        return numberToRound ? Math.round(numberToRound) : null;
     }
 }

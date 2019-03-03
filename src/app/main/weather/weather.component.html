@@ -1,58 +1,46 @@
-<!--<div class="container">
-    <div class="row">
-        <div class="col-sm-6">
-            <div class="card">
-                <div class="card-header">Panel Heading</div>
-                <div class="card-block">Panel Content</div>
-            </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="card">
-                <div class="card-header">Panel Heading</div>
-                <div class="card-block">Panel Content</div>
-            </div>
-        </div>
-    </div>
-</div> -->
-<!--<div class="page-wrapper">
-    <ng-template ngFor let-weather [ngForOf]="currentWeather | async" let-odd="odd" let-even="even">    
-    <div class="page-row">
-        <div class="page-column">
-            <div class="column-content">
-                    AAAA
-            </div>
-            <div class="column-content">
-                    AAAA
-            </div>
-            <div class="column-content">
-                    AAAA
-            </div>
-            <div class="column-content">
-                    AAAA
-            </div>
-        </div>
-        <div class="page-column">
-                <div class="column-content">
-                        AAAA
-                </div>
-                <div class="column-content">
-                        AAAA
-                </div>
-            </div>
-    </div>
-    </ng-template>
-</div> -->
 
-weather component
-{{currentWeathers}}
+<h1>Current Weather</h1>
 <div class="container">
     <div class="row">
-        <div *ngFor="let weather of currentWeather | async" class="col-xs-12 col-sm-6">
-            <img [src]="getIconUrl(weather)">
-            {{weather.id}}
-            {{weather.name}}
-            {{weather.main.temp}}
-            {{weather.weather[0].icon}}
+        <div *ngFor="let weather of currentWeather | async" class="col-xs-12 col-sm-12 col-xl-6">
+            <div class="weather-card">
+                <div class="weather-card-header">
+                    <span class="weather-card-img">
+                        <img [src]="getIconUrl(weather)">
+                    </span>
+                    <div class="weather-city-name">
+                        <span class="weather-name">{{weather.name}}</span>
+                        <p class="weather-description">{{weather.weather[0].description}}</p>
+                    </div>
+                </div>
+                <div class="weather-card-content">
+                    <div class="weather-card-temperature">
+                        {{getRoundNumber(weather.main.temp)}}°C
+                    </div>
+                    <div class="weather-card-details">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td class="desc">humidity</td>
+                                    <td><span class="bold">{{weather.main.humidity}}%</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="desc">pressure</td>
+                                    <td><span class="bold">{{weather.main.pressure}}</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="desc">temp. max</td>
+                                    <td><span class="bold">{{getRoundNumber(weather.main.temp_max)}}°C</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="desc">temp. min</td>
+                                    <td><span class="bold">{{getRoundNumber(weather.main.temp_min)}}°C</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

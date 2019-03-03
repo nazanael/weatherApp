@@ -21,7 +21,6 @@ export class ConfigService {
                 subject.complete();
             },
             (err: any) => {
-                // TODO: ERROR HANDLING
                 alert('Error loading configuration');
                 subject.error(err);
             }

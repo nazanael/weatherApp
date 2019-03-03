@@ -10,17 +10,15 @@ import { ConfigService } from 'src/app/core/services/config.service';
 export class WeatherService {
 
     private weatherCallMilliseconds = 30000; //30 SECONDS
-    private timerWeather: any;
+    private timerWeather: any = null;
 
-    private  API_WEATHER_URL =
-    'https://api.openweathermap.org/data/2.5/group?id=3871336,3435910,3936456,3448439&units=metric&appid=17300387840e5ef455c5fa68681528af';
-
+    private  API_WEATHER_URL: string;
     public response: ResponseWeather = null;
     public currentWeathers: CityWeather[];
 
     constructor(private httpClient: HttpClient, private store: Store<any>) {
         this.API_WEATHER_URL = ConfigService.Configuration.weatherUrl + '?id='
-        + ConfigService.Configuration.citiesIds + '&appid=' + ConfigService.Configuration.appId;
+        + ConfigService.Configuration.citiesIds + '&units=metric&appid=' + ConfigService.Configuration.appId;
         this.weatherCallMilliseconds = ConfigService.Configuration.refreshTimeMs;
         this.initializeTimer();
     }
