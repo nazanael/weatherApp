@@ -37,8 +37,7 @@ export class WeatherService {
 
     public initializeTimer(): void {
         this.timerWeather = setInterval(() => {
-            console.log(this.API_WEATHER_URL);
-            //this.callWeatherApi();
+            this.callWeatherApi();
         }, this.weatherCallMilliseconds);
     }
 }

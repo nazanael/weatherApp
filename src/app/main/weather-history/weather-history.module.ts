@@ -11,7 +11,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [CommonModule, SharedModule.forRoot(), RouterModule.forChild(routes)],
+    imports: [CommonModule, RouterModule.forChild(routes)],
     declarations: [WeatherHistoryComponent],
     exports: [RouterModule]
 })

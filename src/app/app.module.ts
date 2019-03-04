@@ -10,6 +10,7 @@ import { WeatherService } from './shared/services/weather-service';
 import { CoreModule } from './core/core.module';
 import { ConfigService } from './core/services/config.service';
 import { WeatherErrorHandler } from './shared/handler/weather-error.handler';
+import { SharedModule } from './shared/shared.module';
 
 export function initializeConfiguration(configService: ConfigService) {
   return () => configService.getConfiguration();
@@ -21,6 +22,7 @@ export function initializeConfiguration(configService: ConfigService) {
   ],
   imports: [
     CoreModule.forRoot(),
+    SharedModule.forRoot(),
     BrowserModule,
     AppRoutingModule,
     LayoutModule,

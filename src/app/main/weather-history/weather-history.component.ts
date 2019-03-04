@@ -10,22 +10,12 @@ import { Subscription } from 'rxjs';
     templateUrl: './weather-history.component.html',
     styleUrls: ['./weather-history.component.scss'],
 })
-export class WeatherHistoryComponent implements OnInit, OnDestroy {
+export class WeatherHistoryComponent implements OnInit {
     weatherHistory: Array<CityWeather[]>;
     public chart: any = null;
     private numberOfCities: number = ConfigService.Configuration.citiesIds.length;
     private labelsChartArray: string[];
     private historyStoreSubscription: Subscription;
-
-    /*private chartOptions = {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
-        }
-    };*/
 
     constructor(private store: Store<any>, private weatherService: WeatherService) {}
 
@@ -35,7 +25,6 @@ export class WeatherHistoryComponent implements OnInit, OnDestroy {
             this.weatherHistory = data;
             this.prepareCharts();
         });
-        //this.prepareCharts();
     }
 
     addWeather() {
@@ -52,15 +41,13 @@ export class WeatherHistoryComponent implements OnInit, OnDestroy {
                     datasets.push({
                         label: lastWeatherHistory[i].name,
                         data: [lastWeatherHistory[i].main.temp],
-                        //borderColor: '#3e95cd',
+                        borderColor: this.dynamicChartColor(),
                         fill: false,
-                        borderWidth: 1
                     });
                 }
                 this.chart = new Chart(document.getElementById('weatherChart'), {
                     type: 'line',
                     data: {labels, datasets },
-                    //options: this.chartOptions
                 });
                 const weatherToAdd = this.weatherHistory.length >= 10 ?
                 this.weatherHistory.slice(this.weatherHistory.length - 10, this.weatherHistory.length - 1)
@@ -94,6 +81,10 @@ export class WeatherHistoryComponent implements OnInit, OnDestroy {
             labelsArray.unshift((i * 3) + 'min. ago');
         }
         return labelsArray;
+    }
+
+    private dynamicChartColor(){
+        return 'rgb(' + Math.random() * 255 + ',' + Math.random() * 255 + ',' + Math.random() * 255 + ')';
     }
 
     ngOnDestroy(): void {

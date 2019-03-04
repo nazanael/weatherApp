@@ -17,7 +17,6 @@ export class WeatherComponent implements OnInit {
 
     ngOnInit() {
         this.currentWeather = this.store.select('currentWeather');
-        this.weatherService.callWeatherApi();
     }
 
     addWeather() {
