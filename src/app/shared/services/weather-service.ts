@@ -5,6 +5,7 @@ import { ResponseWeather } from 'src/app/core/models/response-weather';
 import { CityWeather } from 'src/app/core/models/city-weather';
 import { Store } from '@ngrx/store';
 import { ConfigService } from 'src/app/core/services/config.service';
+import { HttpService } from 'src/app/core/services/http.service';
 
 @Injectable()
 export class WeatherService {
@@ -16,15 +17,14 @@ export class WeatherService {
     public response: ResponseWeather = null;
     public currentWeathers: CityWeather[];
 
-    constructor(private httpClient: HttpClient, private store: Store<any>) {
+    constructor(private httpService: HttpService, private store: Store<any>) {
         this.API_WEATHER_URL = ConfigService.Configuration.weatherUrl + '?id='
-        + ConfigService.Configuration.citiesIds + '&units=metric&appid=' + ConfigService.Configuration.appId;
+        + ConfigService.Configuration.citiesIds.join() + '&units=metric&appid=' + ConfigService.Configuration.appId;
         this.weatherCallMilliseconds = ConfigService.Configuration.refreshTimeMs;
         this.initializeTimer();
     }
     public callWeatherApi() {
-        console.log(this.API_WEATHER_URL);
-        this.httpClient.get<ResponseWeather>(this.API_WEATHER_URL)
+        this.httpService.callGetHttp<ResponseWeather>(this.API_WEATHER_URL)
         .pipe(map(res => res.list))
         .subscribe(data =>  {
             this.currentWeathers = data;

@@ -1,9 +1,5 @@
 weather history component
-<p>
-        Weather History: {{weatherHistory}}
-    </p>
-    <div *ngFor="let weather of weatherHistory | async">{{weather}}</div>
-    <ul>
-    </ul>
-    <br/>
-    <button (click)="addWeather()">ADD</button>
+<button (click)="addWeather()">ADD</button>
+<div style="width: 500px; height: 500px;">
+    <canvas id="weatherChart">{{ chart }}</canvas>
+</div>

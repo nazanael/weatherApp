@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { WeatherService } from 'src/app/shared/services/weather-service';
 import { CityWeather } from 'src/app/core/models/city-weather';
 import { Store } from '@ngrx/store';
@@ -17,14 +17,13 @@ export class WeatherComponent implements OnInit {
 
     ngOnInit() {
         this.currentWeather = this.store.select('currentWeather');
+        this.weatherService.callWeatherApi();
     }
 
     addWeather() {
         this.weatherService.callWeatherApi();
-        console.log(this.weatherService.currentWeathers);
     }
 
-    //TODO: get in service, picture component?
     getIconUrl(cityWeather: CityWeather) {
         if (cityWeather && cityWeather.weather) {
             return ConfigService.Configuration.weatherIconUrl + cityWeather.weather[0].icon + '.png';
