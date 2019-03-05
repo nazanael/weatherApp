@@ -63,7 +63,7 @@ export class WeatherHistoryComponent implements OnInit, OnDestroy {
         }
     }
 
-    private addInfoToChart(weatherElement: CityWeather[]){
+    private addInfoToChart(weatherElement: CityWeather[]) {
         for (let i = 0; i < this.numberOfCities; i++) {
             if (this.chart.data.datasets[i].data.length === 10) {
                 this.chart.data.datasets[i].data.shift();
@@ -84,7 +84,7 @@ export class WeatherHistoryComponent implements OnInit, OnDestroy {
         return labelsArray;
     }
 
-    private dynamicChartColor(){
+    private dynamicChartColor() {
         return 'rgb(' + Math.random() * 255 + ',' + Math.random() * 255 + ',' + Math.random() * 255 + ')';
     }
 
