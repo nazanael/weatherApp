@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
     templateUrl: './weather-history.component.html',
     styleUrls: ['./weather-history.component.scss'],
 })
-export class WeatherHistoryComponent implements OnInit {
+export class WeatherHistoryComponent implements OnInit, OnDestroy {
     weatherHistory: Array<CityWeather[]>;
     public chart: any = null;
     private numberOfCities: number = ConfigService.Configuration.citiesIds.length;
