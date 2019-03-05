@@ -2,7 +2,6 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { WeatherService } from './services/weather-service';
 import { HttpClientModule } from '@angular/common/http';
 
-
 @NgModule({
     imports: [ HttpClientModule ],
 })

@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { WeatherComponent } from './main/weather/weather.component';
 
-//const routes: Routes = [];
-
 export const appRoutes: Routes = [
   {
     path: 'weather',

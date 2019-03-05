@@ -12,7 +12,7 @@ export class ConfigService {
     constructor(private httpClient: HttpClient) {}
 
     public getConfiguration() {
-        let subject = new Subject();
+        const subject = new Subject();
         this.httpClient.get<AppConfig>(this.CONFIG_URL).subscribe(
             (data: AppConfig) => {
                 ConfigService.Configuration = data;
