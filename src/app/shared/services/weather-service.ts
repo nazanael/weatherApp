@@ -10,7 +10,7 @@ import { HttpService } from 'src/app/core/services/http.service';
 @Injectable()
 export class WeatherService {
 
-    private weatherCallMilliseconds = 30000; //30 SECONDS
+    private weatherCallMilliseconds;
     private timerWeather: any = null;
 
     private  API_WEATHER_URL: string;
@@ -21,6 +21,7 @@ export class WeatherService {
         this.API_WEATHER_URL = ConfigService.Configuration.weatherUrl + '?id='
         + ConfigService.Configuration.citiesIds.join() + '&units=metric&appid=' + ConfigService.Configuration.appId;
         this.weatherCallMilliseconds = ConfigService.Configuration.refreshTimeMs;
+        this.callWeatherApi();
         this.initializeTimer();
     }
     public callWeatherApi() {

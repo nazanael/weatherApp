@@ -18,18 +18,4 @@ export class WeatherComponent implements OnInit {
     ngOnInit() {
         this.currentWeather = this.store.select('currentWeather');
     }
-
-    addWeather() {
-        this.weatherService.callWeatherApi();
-    }
-
-    getIconUrl(cityWeather: CityWeather) {
-        if (cityWeather && cityWeather.weather) {
-            return ConfigService.Configuration.weatherIconUrl + cityWeather.weather[0].icon + '.png';
-        }
-    }
-
-    getRoundNumber(numberToRound: number): number {
-        return numberToRound ? Math.round(numberToRound) : null;
-    }
 }

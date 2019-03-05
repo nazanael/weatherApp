@@ -3,5 +3,5 @@
     "citiesIds": ["3871336","3435910","3936456","3448439"],
     "appId": "17300387840e5ef455c5fa68681528af",
     "weatherIconUrl": "http://openweathermap.org/img/w/",
-    "refreshTimeMs": 5000
+    "refreshTimeMs": 180000
   }

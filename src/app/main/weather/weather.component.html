@@ -3,45 +3,8 @@
 <div class="container">
     <div class="row">
         <div *ngFor="let weather of currentWeather | async" class="col-xs-12 col-sm-12 col-xl-6">
-            <div class="weather-card">
-                <div class="weather-card-header">
-                    <span class="weather-card-img">
-                        <img [src]="getIconUrl(weather)">
-                    </span>
-                    <div class="weather-city-name">
-                        <span class="weather-name">{{weather.name}}</span>
-                        <p class="weather-description">{{weather.weather[0].description}}</p>
-                    </div>
-                </div>
-                <div class="weather-card-content">
-                    <div class="weather-card-temperature">
-                        {{getRoundNumber(weather.main.temp)}}°C
-                    </div>
-                    <div class="weather-card-details">
-                        <table>
-                            <tbody>
-                                <tr>
-                                    <td class="desc">humidity</td>
-                                    <td><span class="bold">{{weather.main.humidity}}%</span></td>
-                                </tr>
-                                <tr>
-                                    <td class="desc">pressure</td>
-                                    <td><span class="bold">{{weather.main.pressure}}</span></td>
-                                </tr>
-                                <tr>
-                                    <td class="desc">temp. max</td>
-                                    <td><span class="bold">{{getRoundNumber(weather.main.temp_max)}}°C</span></td>
-                                </tr>
-                                <tr>
-                                    <td class="desc">temp. min</td>
-                                    <td><span class="bold">{{getRoundNumber(weather.main.temp_min)}}°C</span></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+            <app-weather-item [weather]="weather"></app-weather-item>
         </div>
     </div>
 </div>
-<button (click)="addWeather()">ADD</button>
+<button (click)="weatherService.callWeatherApi()">ADD</button>

@@ -36,22 +36,22 @@ export class WeatherHistoryComponent implements OnInit {
             const lastWeatherHistory = this.weatherHistory[this.weatherHistory.length - 1];
             if (!this.chart) {
                 const datasets = [];
-                const labels = [this.labelsChartArray[this.labelsChartArray.length - 1]];
+                const labels = [];
                 for (let i = 0; i < this.numberOfCities; i++) {
                     datasets.push({
                         label: lastWeatherHistory[i].name,
-                        data: [lastWeatherHistory[i].main.temp],
+                        data: [],
                         borderColor: this.dynamicChartColor(),
                         fill: false,
                     });
                 }
-                this.chart = new Chart(document.getElementById('weatherChart'), {
+                this.chart = new Chart('weatherChart', {
                     type: 'line',
                     data: {labels, datasets },
                 });
-                const weatherToAdd = this.weatherHistory.length >= 10 ?
-                this.weatherHistory.slice(this.weatherHistory.length - 10, this.weatherHistory.length - 1)
-                : this.weatherHistory.slice(0, this.weatherHistory.length - 1);
+                const weatherToAdd = this.weatherHistory.length > 10 ?
+                this.weatherHistory.slice(this.weatherHistory.length - 10)
+                : this.weatherHistory.slice(0);
                 for (const weather of weatherToAdd) {
                     this.addInfoToChart(weather);
                 }
@@ -65,21 +65,22 @@ export class WeatherHistoryComponent implements OnInit {
 
     private addInfoToChart(weatherElement: CityWeather[]){
         for (let i = 0; i < this.numberOfCities; i++) {
-            if (this.chart.data.labels.length === 10) {
+            if (this.chart.data.datasets[i].data.length === 10) {
                 this.chart.data.datasets[i].data.shift();
             }
             this.chart.data.datasets[i].data.push(weatherElement[i].main.temp);
         }
         if (this.chart.data.labels.length < 10) {
-            this.chart.data.labels.unshift(((this.chart.data.labels.length) * 3) + ' min. ago');
+            this.chart.data.labels.unshift(this.labelsChartArray[this.chart.data.labels.length]);
         }
     }
 
     private crateLabelsArray(): string[] {
-        const labelsArray = ['Current'];
+        const labelsArray = [];
         for (let i = 9; i > 0; i--) {
             labelsArray.unshift((i * 3) + 'min. ago');
         }
+        labelsArray.unshift('Current');
         return labelsArray;
     }
 
